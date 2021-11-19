@@ -1,3 +1,4 @@
+// Functionalities related to file handling, such as reading or writing.
 package file
 
 import (
@@ -14,6 +15,7 @@ const (
 	fileMode  = 0600
 )
 
+// Get Advent of code input from a certain date into string splices. If the file isn't found will a download be attempted.
 func GetInput(timeStr string, delimiter string) []string {
 	time := date.ParseDate(timeStr)
 	year, day := date.TimeToDayYearString(time)
