@@ -24,13 +24,20 @@ func wrappingPaperNeeded(input []string) int {
 	feet := 0
 	presents := conv.ToPresents(input)
 
-	for _, box := range presents {
-		feet += box.SurfaceArea() + box.SmallestSideArea()
+	for _, present := range presents {
+		feet += present.SurfaceArea() + present.SmallestSideArea()
 	}
 
 	return feet
 }
 
 func ribbonNeeded(input []string) int {
-	return 0
+	feet := 0
+	presents := conv.ToPresents(input)
+
+	for _, present := range presents {
+		feet += present.RibbonLength()
+	}
+
+	return feet
 }
