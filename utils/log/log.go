@@ -16,5 +16,5 @@ var (
 func Init() {
 	Info = log.New(os.Stderr, "INFO: ", 0)
 	Warn = log.New(os.Stderr, "WARNING: ", 0)
-	Err = log.New(os.Stderr, "ERROR", 0)
+	Err = log.New(os.Stderr, "ERROR: ", 0)
 }

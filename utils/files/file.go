@@ -31,7 +31,7 @@ func GetInput(timeStr string, delimiter string) []string {
 		log.Err.Fatal(err)
 	}
 
-	err = SaveInputToFile(filepath, input, delimiter)
+	err = saveInputToFile(filepath, input, delimiter)
 	if err != nil {
 		log.Warn.Print(err)
 	}
@@ -49,11 +49,16 @@ func getInputFromFile(filepath string, delimiter string) ([]string, error) {
 	dataStr := string(data)
 	input := strings.Split(dataStr, delimiter)
 
+	// TODO: Figure out why this part is needed.
+	if input[len(input)-1] == "" {
+		input = input[:len(input)-1]
+	}
+
 	log.Info.Print("Read input from file successfully.")
 	return input, nil
 }
 
-func SaveInputToFile(filepath string, input []string, delimiter string) error {
+func saveInputToFile(filepath string, input []string, delimiter string) error {
 	dataStr := strings.Join(input, delimiter)
 	data := []byte(dataStr)
 	return os.WriteFile(filepath, data, fileMode)
