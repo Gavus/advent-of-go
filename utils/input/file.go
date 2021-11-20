@@ -18,7 +18,7 @@ const (
 // Get Advent of code input from a certain date into strings. If the file isn't found will a download be attempted.
 func GetInput(timeStr string, delimiter string) []string {
 	time := date.ParseDate(timeStr)
-	year, day := date.TimeToDayYearString(time)
+	year, day := date.ToDayYearString(time)
 	filepath := fmt.Sprintf(inputPath, year, day)
 
 	if !fileExists(filepath) {

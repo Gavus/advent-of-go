@@ -7,14 +7,14 @@ import (
 
 // Present with its dimensions.
 type Present struct {
-	h int
 	l int
 	w int
+	h int
 }
 
 // Convert Present into a string.
 func (p Present) String() string {
-	return fmt.Sprintf("l: %d, w: %d, h: %d", p.l, p.w, p.h)
+	return fmt.Sprintf("[%d %d %d]", p.l, p.w, p.h)
 }
 
 // Set Present's dimensions.

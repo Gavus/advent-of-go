@@ -22,7 +22,7 @@ func ParseDate(date string) time.Time {
 }
 
 // Convert time.Time into day and year as strings.
-func TimeToDayYearString(time time.Time) (string, string) {
+func ToDayYearString(time time.Time) (string, string) {
 	year := strconv.Itoa(time.Year())
 	day := strconv.Itoa(time.Day())
 	if len(day) == 1 {
