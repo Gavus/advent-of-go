@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/Gavus/advent-of-code/utils/conv"
-	"github.com/Gavus/advent-of-code/utils/files"
-	"github.com/Gavus/advent-of-code/utils/log"
+	"github.com/Gavus/advent-of-code/utils/input"
+	_ "github.com/Gavus/advent-of-code/utils/log"
 )
 
 const (
@@ -13,8 +13,7 @@ const (
 )
 
 func main() {
-	log.Init()
-	input := file.GetInput("2015-12-02", "\n")
+	input := input.GetInput("2015-12-02", "\n")
 
 	fmt.Println(question1, wrappingPaperNeeded(input))
 	fmt.Println(question2, ribbonNeeded(input))
