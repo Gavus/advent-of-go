@@ -2,6 +2,7 @@
 package conv
 
 import (
+	"errors"
 	"fmt"
 	"github.com/Gavus/advent-of-code/utils/types"
 	"strings"
@@ -34,4 +35,24 @@ func ToStrings(bytes []byte, delimiter string) []string {
 	}
 
 	return input
+}
+
+// Convert strings to Directions.
+func ToDirections(input []string) ([]types.Direction, error) {
+	dirs := make([]types.Direction, len(input))
+	for i, v := range input {
+		switch v {
+		case "<":
+			dirs[i] = types.DirLeft
+		case ">":
+			dirs[i] = types.DirRight
+		case "^":
+			dirs[i] = types.DirUp
+		case "v":
+			dirs[i] = types.DirDown
+		default:
+			return []types.Direction{}, errors.New("Invalid character found in input")
+		}
+	}
+	return dirs, nil
 }
