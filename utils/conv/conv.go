@@ -2,6 +2,8 @@
 package conv
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/Gavus/advent-of-code/utils/types"
@@ -55,4 +57,18 @@ func ToDirections(input []string) ([]types.Direction, error) {
 		}
 	}
 	return dirs, nil
+}
+
+// Convert bytes to string representation of the hex.
+func ToString(bytes []byte) string {
+	return hex.EncodeToString(bytes)
+}
+
+// Convert string and int to MD5Sum.
+func Md5Sum(str string, num int) string {
+	var combined string
+	fmt.Sscanf(combined, "%s%d", str, num)
+	bytes := []byte(combined)
+	hex := md5.Sum(bytes)
+	return ToString(hex[:])
 }
