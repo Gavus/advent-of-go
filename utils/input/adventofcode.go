@@ -13,6 +13,7 @@ import (
 const (
 	domain         = "adventofcode.com"
 	inputUrlFormat = "https://%s/%d/day/%d/input"
+	sessionIdPath  = "./sessionid"
 )
 
 // Get input directly from Advent of code webpage.
@@ -51,15 +52,28 @@ func DownloadInput(year int, day int) ([]byte, error) {
 }
 
 // Get session cookie from adventofcode.
+// Searches through all webbrowsers for the cookie. Reads a file called "sessionid" as backup.
 func getCookie() (*http.Cookie, error) {
 	cookies := kooky.ReadCookies(kooky.Valid, kooky.DomainHasSuffix(domain))
-
-	if len(cookies) == 0 {
-		return nil, errors.New(domain + " cookie not found")
+	if len(cookies) != 0 {
+		kooky := cookies[0]
+		cookie := new(http.Cookie)
+		cookie.Name, cookie.Value = kooky.HTTPCookie().Name, kooky.HTTPCookie().Value
+		return cookie, nil
 	}
 
-	kooky := cookies[0]
-	cookie := new(http.Cookie)
-	cookie.Name, cookie.Value = kooky.HTTPCookie().Name, kooky.HTTPCookie().Value
-	return cookie, nil
+	if fileExists(sessionIdPath) {
+		input, err := getInputFromFile(sessionIdPath, "\n")
+		if err != nil {
+			return nil, errors.New("Could not read sessionid file")
+		} else if len(input) != 1 {
+			return nil, errors.New("sessionid should only contain one line followed by a newline")
+		} else {
+			cookie := new(http.Cookie)
+			cookie.Name, cookie.Value = "session", input[0]
+			return cookie, nil
+		}
+	}
+
+	return nil, errors.New("Could not find cookie")
 }

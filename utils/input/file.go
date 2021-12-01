@@ -15,7 +15,10 @@ const (
 	fileMode  = 0600
 )
 
-// Get Advent of code input from a certain date into strings. If the file isn't found will a download be attempted.
+// Get Advent of code input from a certain date into strings. If the file isn't
+// found will a download be attempted. The download will use a session cookie,
+// either from a webbrowser or if a "sessionid" file is found at root project
+// directory.
 func GetInput(timeStr string, delimiter string) []string {
 	time := date.ParseDate(timeStr)
 	year, day := date.ToDayYearString(time)
