@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Gavus/advent-of-code/utils/types"
+	"strconv"
 	"strings"
 )
 
@@ -57,6 +58,19 @@ func ToDirections(input []string) ([]types.Direction, error) {
 		}
 	}
 	return dirs, nil
+}
+
+// Convert strings to ints
+func ToInts(input []string) ([]int, error) {
+	ret := []int{}
+	for _, valStr := range input {
+		valInt, err := strconv.Atoi(valStr)
+		if err != nil {
+			return nil, errors.New("Failed to convert string into int")
+		}
+		ret = append(ret, valInt)
+	}
+	return ret, nil
 }
 
 // Convert bytes to string representation of the hex.
