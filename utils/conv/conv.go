@@ -86,3 +86,18 @@ func Md5Sum(str string, num int) string {
 	hex := md5.Sum(bytes)
 	return ToString(hex[:])
 }
+
+func ToSubmarineInstructions(input []string) []types.SubmarineInstruction {
+	instr := []types.SubmarineInstruction{}
+	for _, line := range input {
+		var dir string
+		var dist int
+		_, err := fmt.Sscanf(line, "%s %d", &dir, &dist)
+		if err != nil {
+			panic(err)
+		}
+		instr = append(instr, types.MakeSubmarineInstruction(dir, dist))
+	}
+
+	return instr
+}

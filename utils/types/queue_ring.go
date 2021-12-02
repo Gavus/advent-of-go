@@ -7,19 +7,11 @@ type Ring struct {
 }
 
 func NewRing(size uint) *Ring {
-	r := new(Ring)
-	r.init(size)
 	return &Ring{0, size, make([]int, size)}
 }
 
 func MakeRing(size uint) Ring {
 	return Ring{0, size, make([]int, size)}
-}
-
-func (r *Ring) init(size uint) {
-	r.index = 0
-	r.size = size
-	r.data = make([]int, size)
 }
 
 func (r *Ring) Put(value int) {

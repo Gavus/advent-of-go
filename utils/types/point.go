@@ -10,6 +10,10 @@ type Point struct {
 	Y int
 }
 
+func MakePoint(x int, y int) Point {
+	return Point{x, y}
+}
+
 // Move a Point to specified Direction.
 func Move(from Point, direction Direction) Point {
 	pos := from
@@ -28,10 +32,7 @@ func Move(from Point, direction Direction) Point {
 }
 
 func (p Point) String() string {
-	var str string
-	fmt.Sscanf(str, "(%d,%d)", p.X, p.Y)
-	return str
-
+	return fmt.Sprintf("(%d,%d)", p.X, p.Y)
 }
 
 func Unique(points []Point) []Point {

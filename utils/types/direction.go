@@ -7,10 +7,11 @@ const (
 	DirRight
 	DirUp
 	DirDown
+	DirForward
 )
 
 func (d Direction) String() string {
-	switch(d) {
+	switch d {
 	case DirLeft:
 		return "<"
 	case DirRight:
@@ -19,6 +20,8 @@ func (d Direction) String() string {
 		return "v"
 	case DirUp:
 		return "^"
+	case DirForward:
+		return "f"
 	default:
 		return "error"
 	}
