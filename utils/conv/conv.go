@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/Gavus/advent-of-code/utils/types"
+	"github.com/Gavus/advent-of-go/utils/types"
 	"strconv"
 	"strings"
 )

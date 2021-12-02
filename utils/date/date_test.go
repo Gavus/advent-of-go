@@ -1,7 +1,7 @@
 package date
 
 import (
-	"github.com/Gavus/advent-of-code/testutils/stringf"
+	"github.com/Gavus/advent-of-go/testutils/stringf"
 	"testing"
 	"time"
 )

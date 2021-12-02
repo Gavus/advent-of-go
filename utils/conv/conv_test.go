@@ -1,8 +1,8 @@
 package conv
 
 import (
-	"github.com/Gavus/advent-of-code/testutils/stringf"
-	"github.com/Gavus/advent-of-code/utils/types"
+	"github.com/Gavus/advent-of-go/testutils/stringf"
+	"github.com/Gavus/advent-of-go/utils/types"
 	"testing"
 )
 

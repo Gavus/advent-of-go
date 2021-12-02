@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/Gavus/advent-of-code/utils/log"
+	"github.com/Gavus/advent-of-go/utils/log"
 )
 
 type Submarine struct {

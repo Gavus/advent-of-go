@@ -2,7 +2,7 @@
 package date
 
 import (
-	"github.com/Gavus/advent-of-code/utils/log"
+	"github.com/Gavus/advent-of-go/utils/log"
 	"strconv"
 	"time"
 )

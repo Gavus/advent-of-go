@@ -4,9 +4,9 @@ package input
 import (
 	"errors"
 	"fmt"
-	"github.com/Gavus/advent-of-code/utils/conv"
-	"github.com/Gavus/advent-of-code/utils/date"
-	"github.com/Gavus/advent-of-code/utils/log"
+	"github.com/Gavus/advent-of-go/utils/conv"
+	"github.com/Gavus/advent-of-go/utils/date"
+	"github.com/Gavus/advent-of-go/utils/log"
 	"os"
 )
 

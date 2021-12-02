@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-code/utils/conv"
-	"github.com/Gavus/advent-of-code/utils/input"
-	"github.com/Gavus/advent-of-code/utils/log"
-	"github.com/Gavus/advent-of-code/utils/types"
+	"github.com/Gavus/advent-of-go/utils/conv"
+	"github.com/Gavus/advent-of-go/utils/input"
+	"github.com/Gavus/advent-of-go/utils/log"
+	"github.com/Gavus/advent-of-go/utils/types"
 )
 
 const (
