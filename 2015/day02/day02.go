@@ -15,11 +15,11 @@ const (
 func main() {
 	input := input.GetInput("2015-12-02", "\n")
 
-	fmt.Println(question1, wrappingPaperNeeded(input))
-	fmt.Println(question2, ribbonNeeded(input))
+	fmt.Println(question1, part1(input))
+	fmt.Println(question2, part2(input))
 }
 
-func wrappingPaperNeeded(input []string) int {
+func part1(input []string) int {
 	feet := 0
 	presents, _ := conv.ToPresents(input)
 
@@ -30,7 +30,7 @@ func wrappingPaperNeeded(input []string) int {
 	return feet
 }
 
-func ribbonNeeded(input []string) int {
+func part2(input []string) int {
 	feet := 0
 	presents, _ := conv.ToPresents(input)
 

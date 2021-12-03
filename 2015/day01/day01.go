@@ -8,7 +8,7 @@ import (
 
 const (
 	whichFloorDoSantaGo = "To what floor do the instructions take Santa?"
-	question2 = "What is the position of the character that causes Santa to first enter the basement?"
+	question2           = "What is the position of the character that causes Santa to first enter the basement?"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	solution1, _ := part1(input, 0)
 	fmt.Println(whichFloorDoSantaGo, solution1)
 
-	solution2 := whichCharPosCausesSantaEndUpInBasement(input)
+	solution2 := part2(input)
 	fmt.Println(question2, solution2)
 }
 
@@ -40,7 +40,7 @@ func part1(input []string, floorStop int) (int, int) {
 	return floor, index
 }
 
-func whichCharPosCausesSantaEndUpInBasement(input []string) int {
+func part2(input []string) int {
 	floor := 0
 	floorstop := -1
 	index := 1
