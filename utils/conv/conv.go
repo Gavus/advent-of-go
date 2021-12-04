@@ -101,3 +101,45 @@ func ToSubmarineInstructions(input []string) []types.SubmarineInstruction {
 
 	return instr
 }
+
+// Convert strings to BingoInput and BingoBoards.
+func ToBingo(input []string) (types.BingoInput, []types.BingoBoard) {
+	bi := types.BingoInput{}
+	bbs := []types.BingoBoard{}
+
+
+	// BingoInput
+	for _, v := range strings.Split(input[0], ",") {
+		x, err := strconv.Atoi(v)
+		if err != nil {
+			continue
+		}
+
+		bi = append(bi, x)
+	}
+
+	// BingoBoard
+	row := []string{}
+	for _, v := range input[1:] {
+		if v == "" {
+			if len(row) != 0 {
+				entries, err := ToInts(row)
+				if err != nil {
+					panic(err)
+				}
+				bbs = append(bbs, types.MakeBingoBoard(entries))
+				row = []string{}
+			}
+			continue
+		}
+
+		for _, v := range strings.Split(v, " ") {
+			x := strings.TrimSpace(v)
+			if x != "" {
+				row = append(row, x)
+			}
+		}
+	}
+
+	return bi, bbs
+}
