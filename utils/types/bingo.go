@@ -2,8 +2,8 @@ package types
 
 import (
 	"errors"
-	"github.com/Gavus/advent-of-go/utils/calc"
 	"fmt"
+	"github.com/Gavus/advent-of-go/utils/calc"
 )
 
 const (
@@ -37,9 +37,18 @@ func MakeBingoBoard(input BingoInput) BingoBoard {
 // Convert BingoBoard to string.
 func (b BingoBoard) String() string {
 	str := ""
+
 	for i := 0; i < b.size; i++ {
-		str += calc.String(b.Row(i))
-		str +="\n"
+		for _, v := range b.Row(i) {
+			var format string
+			if calc.Contains(b.hits, v) {
+				format = "*%2d*"
+			} else {
+				format = " %d "
+			}
+			str += fmt.Sprintf(format, v)
+		}
+		str += "\n"
 	}
 	return str
 }
@@ -77,30 +86,44 @@ func (b BingoBoard) BingoRow(col []int) bool {
 }
 
 // Check if BingoBoard has any bingo.
-func (b BingoBoard) Bingo() (bool, []int) {
+func (b BingoBoard) Bingo() bool {
 	for i := 0; i < b.size; i++ {
 		row := b.Row(i)
 		if b.BingoRow(row) {
-			return true, row
+			return true
 		}
 
 		col := b.Column(i)
 		if b.BingoRow(col) {
-			return true, col
+			return true
 		}
 	}
 
-	return false, []int{}
+	return false
 }
 
-func (b BingoBoard) SumUnmarked() int {
+func (b BingoBoard) sumUnmarked() int {
 	vals := []int{}
 	for _, v := range b.entries {
 		if !calc.Contains(b.hits, v) {
-			fmt.Println(v)
 			vals = append(vals, v)
 		}
 	}
 
 	return calc.Sum(vals)
+}
+
+func (b BingoBoard) Score() int {
+	return b.sumUnmarked() * b.hits[len(b.hits)-1]
+}
+
+func RemoveIndex(bbs []BingoBoard, index int) []BingoBoard {
+	if index < 0 || index >= len(bbs) || len(bbs) == 1 {
+		return []BingoBoard{}
+	} else if index == len(bbs)-1 {
+		return bbs[:index]
+
+	} else {
+		return append(bbs[:index], bbs[index+1:]...)
+	}
 }

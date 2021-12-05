@@ -25,7 +25,8 @@ func createInput() []string {
 10 16 15  9 19
 18  8 23 26 20
 22 11 13  6  5
- 2  0 12  3  7`
+ 2  0 12  3  7
+`
 
 	return strings.Split(str, "\n")
 }
@@ -38,7 +39,7 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	g, w := part2(createInput()), 230
+	g, w := part2(createInput()), 1924
 	if g != w {
 		t.Errorf(stringf.Mismatch, g, w)
 	}

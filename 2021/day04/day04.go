@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/input"
 	"github.com/Gavus/advent-of-go/utils/conv"
+	"github.com/Gavus/advent-of-go/utils/input"
 	_ "github.com/Gavus/advent-of-go/utils/log"
 )
 
 const (
 	question1 = "What will your final score be if you choose that board?"
-	question2 = "unknown"
+	question2 = "Once it wins, what would its final score be?"
 )
 
 func main() {
@@ -26,19 +26,36 @@ func part1(input []string) int {
 	bi, bbs := conv.ToBingo(input)
 
 	for _, v := range bi {
-		for _, bb := range bbs {
-			bb.Add(v)
-			fmt.Println(bb)
-			bingo, _ := bb.Bingo()
-			if bingo {
-				return bb.SumUnmarked() * v
+		for i := range bbs {
+			bbs[i].Add(v)
+			if bbs[i].Bingo() {
+				return bbs[i].Score()
 			}
-
 		}
 	}
 	return 0
 }
 
 func part2(input []string) int {
+	bi, bbs := conv.ToBingo(input)
+
+	for _, v := range bi {
+		bingoCount := 0
+		for _, bb := range bbs {
+			if bb.Bingo() {
+				bingoCount++
+			}
+		}
+
+		for i := range bbs {
+			before := bbs[i].Bingo()
+			bbs[i].Add(v)
+			if bbs[i].Bingo() {
+				if !before && bingoCount == len(bbs)-1 {
+					return bbs[i].Score()
+				}
+			}
+		}
+	}
 	return 0
 }

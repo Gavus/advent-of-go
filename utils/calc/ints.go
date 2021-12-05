@@ -1,8 +1,6 @@
 package calc
 
-import (
-	"fmt"
-)
+import ()
 
 func Contains(s []int, e int) bool {
 	for _, a := range s {
@@ -34,12 +32,4 @@ func Equal(a []int, b []int) bool {
 	}
 
 	return true
-}
-
-func String(a []int) string {
-	str := ""
-	for _, v := range a {
-		str += fmt.Sprintf("%d, ", v)
-	}
-	return str
 }

@@ -71,14 +71,11 @@ func TestBingoRow(t *testing.T) {
 
 func TestBingo(t *testing.T) {
 	bb := createBingoBoard()
-	g1, g2 := bb.Bingo()
-	w1, w2 := false, []int{}
+	g := bb.Bingo()
+	w := false
 
-	if g1 != w1 {
-		t.Errorf(stringf.Mismatch, g1, w1)
-	}
-	if !calc.Equal(g2, w2) {
-		t.Errorf(stringf.Mismatch, g2, w2)
+	if g != w {
+		t.Errorf(stringf.Mismatch, g, w)
 	}
 
 	bb.Add(14)
@@ -87,14 +84,11 @@ func TestBingo(t *testing.T) {
 	bb.Add(24)
 	bb.Add(4)
 
-	g1, g2 = bb.Bingo()
-	w1, w2 = true, []int{14, 21, 17, 24, 4}
+	g = bb.Bingo()
+	w = true
 
-	if g1 != w1 {
-		t.Errorf(stringf.Mismatch, g1, w1)
-	}
-	if !calc.Equal(g2, w2) {
-		t.Errorf(stringf.Mismatch, g2, w2)
+	if g != w {
+		t.Errorf(stringf.Mismatch, g, w)
 	}
 }
 
@@ -113,7 +107,7 @@ func TestSumUnmarked(t *testing.T) {
 	bb.Add(0)
 	bb.Add(7)
 
-	g := bb.SumUnmarked()
+	g := bb.sumUnmarked()
 	w := 188
 
 	if g != w {
@@ -121,3 +115,25 @@ func TestSumUnmarked(t *testing.T) {
 	}
 }
 
+func TestScore(t *testing.T) {
+	bb := createBingoBoard()
+	bb.Add(14)
+	bb.Add(21)
+	bb.Add(17)
+	bb.Add(24)
+	bb.Add(4)
+	bb.Add(9)
+	bb.Add(23)
+	bb.Add(11)
+	bb.Add(5)
+	bb.Add(2)
+	bb.Add(0)
+	bb.Add(7)
+
+	g := bb.Score()
+	w := 188*7
+
+	if g != w {
+		t.Errorf(stringf.Mismatch, g, w)
+	}
+}
