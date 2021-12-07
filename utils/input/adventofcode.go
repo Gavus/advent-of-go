@@ -4,8 +4,6 @@ package input
 import (
 	"errors"
 	"fmt"
-	"github.com/zellyn/kooky"
-	_ "github.com/zellyn/kooky/allbrowsers"
 	"io/ioutil"
 	"net/http"
 )
@@ -52,16 +50,7 @@ func DownloadInput(year int, day int) ([]byte, error) {
 }
 
 // Get session cookie from adventofcode.
-// Searches through all webbrowsers for the cookie. Reads a file called "sessionid" as backup.
 func getCookie() (*http.Cookie, error) {
-	cookies := kooky.ReadCookies(kooky.Valid, kooky.DomainHasSuffix(domain))
-	if len(cookies) != 0 {
-		kooky := cookies[0]
-		cookie := new(http.Cookie)
-		cookie.Name, cookie.Value = kooky.HTTPCookie().Name, kooky.HTTPCookie().Value
-		return cookie, nil
-	}
-
 	if fileExists(sessionIdPath) {
 		input, err := getInputFromFile(sessionIdPath, "\n")
 		if err != nil {
