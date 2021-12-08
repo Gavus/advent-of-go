@@ -1,4 +1,4 @@
-package types
+package present
 
 import (
 	"fmt"
@@ -12,16 +12,15 @@ type Present struct {
 	h int
 }
 
+func Make(l, w, h int) Present {
+	return Present{l, w, h}
+}
+
+type Presents []Present
+
 // Convert Present into a string.
 func (p Present) String() string {
 	return fmt.Sprintf("[%d %d %d]", p.l, p.w, p.h)
-}
-
-// Set Present's dimensions.
-func (p *Present) Set(l int, w int, h int) {
-	p.h = h
-	p.l = l
-	p.w = w
 }
 
 // Calculate Present's surface area.
@@ -47,3 +46,21 @@ func (p Present) RibbonLength() int {
 
 	return length
 }
+
+// Convert strings into Presents.
+func ToPresents(input []string) (Presents, error) {
+	presents := Presents{}
+
+	for _, value := range input {
+		var l, w, h int
+		_, err := fmt.Sscanf(value, "%dx%dx%d", &l, &w, &h)
+		if err != nil {
+			return nil, err
+		}
+		presents = append(presents, Make(l, w, h))
+	}
+
+	return presents, nil
+}
+
+

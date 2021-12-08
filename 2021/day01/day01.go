@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	"github.com/Gavus/advent-of-go/utils/input"
-	"github.com/Gavus/advent-of-go/utils/types"
+	"github.com/Gavus/advent-of-go/utils/types/ints"
+	"github.com/Gavus/advent-of-go/utils/types/queue_ring"
 	_ "github.com/Gavus/advent-of-go/utils/log"
 )
 
@@ -25,7 +25,7 @@ func main() {
 
 func part1(input []string) int {
 	increased := 0
-	ints, _ := conv.ToInts(input)
+	ints, _ := ints.ToInts(input)
 	for i, v := range ints {
 		if i == 0 {
 			continue
@@ -41,9 +41,9 @@ func part1(input []string) int {
 
 func part2(input []string) int {
 	increased := 0
-	ints, _ := conv.ToInts(input)
-	a := types.MakeRing(3)
-	b := types.MakeRing(3)
+	ints, _ := ints.ToInts(input)
+	a := queue_ring.Make(3)
+	b := queue_ring.Make(3)
 	for i, v := range ints {
 		if i == 0 {
 			a.Put(v)

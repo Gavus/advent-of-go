@@ -3,18 +3,17 @@ package main
 import (
 	"fmt"
 	"github.com/Gavus/advent-of-go/utils/input"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	_ "github.com/Gavus/advent-of-go/utils/log"
-	"strings"
+	"github.com/Gavus/advent-of-go/utils/types/line"
 )
 
 const (
-	question1 = "unknown"
+	question1 = "At how many points do at least two lines overlap?"
 	question2 = "unknown"
 )
 
 func main() {
-	input := input.GetInput("2015-12-04", "")
+	input := input.GetInput("2021-12-05", "\n")
 
 	solution1 := part1(input)
 	fmt.Println(question1, solution1)
@@ -23,15 +22,10 @@ func main() {
 	fmt.Println(question2, solution2)
 }
 
-func part1(input []string) string {
-	inputStr := strings.Join(input, "")
-	for i := 0;; i++ {
-		md5 := conv.Md5Sum(inputStr, i)
-		fmt.Println(md5)
-		if strings.HasPrefix(md5, "00001") {
-			return md5
-		}
-	}
+func part1(input []string) int {
+	lines := line.StringsToLines(input)
+	lines.StraightToPoints()
+	return 0
 }
 
 func part2(input []string) int {

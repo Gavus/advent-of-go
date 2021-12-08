@@ -1,25 +1,27 @@
-package types
+package bingo
 
 import (
 	"errors"
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/calc"
+	"strings"
+	"strconv"
+	"github.com/Gavus/advent-of-go/utils/types/ints"
 )
 
 const (
 	bingoSize = 5
 )
 
-type BingoInput []int
+type BingoInput ints.Ints
 
 type BingoBoard struct {
 	size    int
-	entries BingoInput
-	hits    []int
+	entries ints.Ints
+	hits    ints.Ints
 }
 
-func MakeBingoBoard(input BingoInput) BingoBoard {
-	bb := BingoBoard{bingoSize, BingoInput{}, []int{}}
+func Make(input ints.Ints) BingoBoard {
+	bb := BingoBoard{bingoSize, ints.Ints{}, ints.Ints{}}
 
 	if len(input) != bingoSize*bingoSize {
 		panic(errors.New("Wrong input length given"))
@@ -41,7 +43,7 @@ func (b BingoBoard) String() string {
 	for i := 0; i < b.size; i++ {
 		for _, v := range b.Row(i) {
 			var format string
-			if calc.Contains(b.hits, v) {
+			if b.hits.Contains(v) {
 				format = "*%2d*"
 			} else {
 				format = " %d "
@@ -59,12 +61,12 @@ func (b *BingoBoard) Add(num int) {
 }
 
 // Get Row.
-func (b BingoBoard) Row(i int) []int {
+func (b BingoBoard) Row(i int) ints.Ints {
 	return b.entries[b.size*i : b.size*i+b.size]
 }
 
 // Get Column.
-func (b BingoBoard) Column(i int) []int {
+func (b BingoBoard) Column(i int) ints.Ints {
 	col := []int{}
 	for j := 0; j < b.size; j++ {
 		col = append(col, b.entries[b.size*j+i])
@@ -74,9 +76,9 @@ func (b BingoBoard) Column(i int) []int {
 }
 
 // Check if column or row got a bingo.
-func (b BingoBoard) BingoRow(col []int) bool {
+func (b BingoBoard) BingoRow(col ints.Ints) bool {
 	for _, v := range col {
-		if !calc.Contains(b.hits, v) {
+		if !b.hits.Contains(v) {
 			return false
 		}
 	}
@@ -103,14 +105,14 @@ func (b BingoBoard) Bingo() bool {
 }
 
 func (b BingoBoard) sumUnmarked() int {
-	vals := []int{}
+	vals := ints.Ints{}
 	for _, v := range b.entries {
-		if !calc.Contains(b.hits, v) {
+		if !b.hits.Contains(v) {
 			vals = append(vals, v)
 		}
 	}
 
-	return calc.Sum(vals)
+	return vals.Sum()
 }
 
 func (b BingoBoard) Score() int {
@@ -126,4 +128,46 @@ func RemoveIndex(bbs []BingoBoard, index int) []BingoBoard {
 	} else {
 		return append(bbs[:index], bbs[index+1:]...)
 	}
+}
+
+
+// Convert strings to BingoInput and BingoBoards.
+func ToBingo(input []string) (BingoInput, []BingoBoard) {
+	bi := BingoInput{}
+	bbs := []BingoBoard{}
+
+	// BingoInput
+	for _, v := range strings.Split(input[0], ",") {
+		x, err := strconv.Atoi(v)
+		if err != nil {
+			continue
+		}
+
+		bi = append(bi, x)
+	}
+
+	// BingoBoard
+	row := []string{}
+	for _, v := range input[1:] {
+		if v == "" {
+			if len(row) != 0 {
+				entries, err := ints.ToInts(row)
+				if err != nil {
+					panic(err)
+				}
+				bbs = append(bbs, Make(entries))
+				row = []string{}
+			}
+			continue
+		}
+
+		for _, v := range strings.Split(v, " ") {
+			x := strings.TrimSpace(v)
+			if x != "" {
+				row = append(row, x)
+			}
+		}
+	}
+
+	return bi, bbs
 }

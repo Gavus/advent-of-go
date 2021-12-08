@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	"github.com/Gavus/advent-of-go/utils/input"
 	"github.com/Gavus/advent-of-go/utils/log"
-	"github.com/Gavus/advent-of-go/utils/types"
+	"github.com/Gavus/advent-of-go/utils/types/direction"
+	"github.com/Gavus/advent-of-go/utils/types/point"
 )
 
 const (
@@ -24,46 +24,46 @@ func main() {
 }
 
 func part1(input []string) int {
-	dirs, err := conv.ToDirections(input)
-	visitedPlaces := []types.Point{}
-	santaPos := types.Point{X: 0, Y: 0}
+	dirs, err := direction.ToDirections(input)
+	visitedPlaces := point.Points{}
+	santaPos := point.Make(0, 0)
 	if err != nil {
 		log.Err.Fatal(err)
 	}
 
 	for _, d := range dirs {
-		tmp := types.Move(santaPos, d)
+		tmp := point.Move(santaPos, d)
 		visitedPlaces = append(visitedPlaces, tmp)
 		santaPos = tmp
 	}
 
-	visitedPlaces = types.Unique(visitedPlaces)
+	visitedPlaces = point.Unique(visitedPlaces)
 
 	return len(visitedPlaces)
 }
 
 func part2(input []string) int {
-	santa := types.Point{X: 0, Y: 0}
+	santa := point.Make(0, 0)
 	roboSanta := santa
-	dirs, err := conv.ToDirections(input)
-	visitedPlaces := []types.Point{}
+	dirs, err := direction.ToDirections(input)
+	visitedPlaces := point.Points{}
 	if err != nil {
 		log.Err.Fatal(err)
 	}
 
 	for i, d := range dirs {
 		if i%2 == 0 {
-			tmp := types.Move(roboSanta, d)
+			tmp := point.Move(roboSanta, d)
 			visitedPlaces = append(visitedPlaces, tmp)
 			roboSanta = tmp
 		} else {
-			tmp := types.Move(santa, d)
+			tmp := point.Move(santa, d)
 			visitedPlaces = append(visitedPlaces, tmp)
 			santa = tmp
 		}
 	}
 
-	visitedPlaces = types.Unique(visitedPlaces)
+	visitedPlaces = point.Unique(visitedPlaces)
 
 	return len(visitedPlaces)
 }

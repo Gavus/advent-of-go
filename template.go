@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/Gavus/advent-of-go/utils/input"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	_ "github.com/Gavus/advent-of-go/utils/log"
 )
 

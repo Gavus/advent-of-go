@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/conv"
+	"github.com/Gavus/advent-of-go/utils/types/present"
 	"github.com/Gavus/advent-of-go/utils/input"
 	_ "github.com/Gavus/advent-of-go/utils/log"
 )
@@ -21,7 +21,7 @@ func main() {
 
 func part1(input []string) int {
 	feet := 0
-	presents, _ := conv.ToPresents(input)
+	presents, _ := present.ToPresents(input)
 
 	for _, present := range presents {
 		feet += present.SurfaceArea() + present.SmallestSideArea()
@@ -32,7 +32,7 @@ func part1(input []string) int {
 
 func part2(input []string) int {
 	feet := 0
-	presents, _ := conv.ToPresents(input)
+	presents, _ := present.ToPresents(input)
 
 	for _, present := range presents {
 		feet += present.RibbonLength()

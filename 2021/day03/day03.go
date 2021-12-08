@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/Gavus/advent-of-go/utils/input"
 	_ "github.com/Gavus/advent-of-go/utils/log"
-	"github.com/Gavus/advent-of-go/utils/types"
+	"github.com/Gavus/advent-of-go/utils/types/binary_strings"
 )
 
 const (
@@ -23,13 +23,13 @@ func main() {
 }
 
 func part1(input []string) uint {
-	gamma, epsilon := types.CalcGammaEpsilon(input)
+	gamma, epsilon := bstrings.CalcGammaEpsilon(input)
 
 	return gamma * epsilon
 }
 
 func part2(input []string) uint {
-	ogr := types.CalcOxygenGeneratorRating(input)
-	co2sr := types.CO2ScrubberRating(input)
+	ogr := bstrings.CalcOxygenGeneratorRating(input)
+	co2sr := bstrings.CO2ScrubberRating(input)
 	return ogr * co2sr
 }

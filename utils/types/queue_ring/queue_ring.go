@@ -1,4 +1,4 @@
-package types
+package queue_ring
 
 type Ring struct {
 	index uint
@@ -10,7 +10,7 @@ func NewRing(size uint) *Ring {
 	return &Ring{0, size, make([]int, size)}
 }
 
-func MakeRing(size uint) Ring {
+func Make(size uint) Ring {
 	return Ring{0, size, make([]int, size)}
 }
 

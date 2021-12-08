@@ -1,32 +1,32 @@
-package types
+package bingo
 
 import (
 	"github.com/Gavus/advent-of-go/testutils/stringf"
-	"github.com/Gavus/advent-of-go/utils/calc"
+	"github.com/Gavus/advent-of-go/utils/types/ints"
 	"testing"
 )
 
 func createBingoBoard() BingoBoard {
-	input := []int{
+	input := ints.Ints{
 		14, 21, 17, 24, 4,
 		10, 16, 15, 9, 19,
 		18, 8, 23, 26, 20,
 		22, 11, 13, 6, 5,
 		2, 0, 12, 3, 7}
-	return MakeBingoBoard(input)
+	return Make(input)
 }
 
 func TestRow(t *testing.T) {
 	bb := createBingoBoard()
 	g := bb.Row(0)
-	w := []int{14, 21, 17, 24, 4}
-	if !calc.Equal(g, w) {
+	w := ints.Ints{14, 21, 17, 24, 4}
+	if !g.Equal(w) {
 		t.Errorf(stringf.Mismatch, g, w)
 	}
 
 	g = bb.Row(3)
-	w = []int{22, 11, 13, 6, 5}
-	if !calc.Equal(g, w) {
+	w = ints.Ints{22, 11, 13, 6, 5}
+	if !g.Equal(w) {
 		t.Errorf(stringf.Mismatch, g, w)
 	}
 }
@@ -34,14 +34,14 @@ func TestRow(t *testing.T) {
 func TestColumn(t *testing.T) {
 	bb := createBingoBoard()
 	g := bb.Column(0)
-	w := []int{14, 10, 18, 22, 2}
-	if !calc.Equal(g, w) {
+	w := ints.Ints{14, 10, 18, 22, 2}
+	if !g.Equal(w) {
 		t.Errorf(stringf.Mismatch, g, w)
 	}
 
 	g = bb.Column(3)
-	w = []int{24, 9, 26, 6, 3}
-	if !calc.Equal(g, w) {
+	w = ints.Ints{24, 9, 26, 6, 3}
+	if !g.Equal(w) {
 		t.Errorf(stringf.Mismatch, g, w)
 	}
 }

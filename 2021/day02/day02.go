@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	"github.com/Gavus/advent-of-go/utils/input"
 	_ "github.com/Gavus/advent-of-go/utils/log"
-	"github.com/Gavus/advent-of-go/utils/types"
+	"github.com/Gavus/advent-of-go/utils/types/point"
+	"github.com/Gavus/advent-of-go/utils/types/submarine"
 )
 
 const (
@@ -24,23 +24,23 @@ func main() {
 }
 
 func part1(input []string) int {
-	submarine := types.MakeSubmarine(types.MakePoint(0, 0))
-	instructions := conv.ToSubmarineInstructions(input)
+	sub := submarine.Make(point.Make(0, 0))
+	instructions := submarine.ToSubmarineInstructions(input)
 
 	for _, instr := range instructions {
-		submarine.Move(instr)
+		sub.Move(instr)
 	}
 
-	return submarine.Mult()
+	return sub.Mult()
 }
 
 func part2(input []string) int {
-	submarine := types.MakeSubmarine(types.MakePoint(0, 0))
-	instructions := conv.ToSubmarineInstructions(input)
+	sub := submarine.Make(point.Make(0, 0))
+	instructions := submarine.ToSubmarineInstructions(input)
 
 	for _, instr := range instructions {
-		submarine.Move2(instr)
+		sub.Move2(instr)
 	}
 
-	return submarine.Mult()
+	return sub.Mult()
 }

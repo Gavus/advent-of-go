@@ -4,8 +4,8 @@ package input
 import (
 	"errors"
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	"github.com/Gavus/advent-of-go/utils/date"
+	"github.com/Gavus/advent-of-go/utils/types/bytes"
 	"github.com/Gavus/advent-of-go/utils/log"
 	"os"
 )
@@ -54,7 +54,7 @@ func getInputFromFile(filepath string, delimiter string) ([]string, error) {
 		return make([]string, 0), err
 	}
 
-	input := conv.ToStrings(data, delimiter)
+	input := bytes.ToStrings(data, delimiter)
 
 	return input, nil
 }

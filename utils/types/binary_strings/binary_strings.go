@@ -1,5 +1,5 @@
 // Assumes string contains only ones and zeroes.
-package types
+package bstrings
 
 import (
 	"strconv"

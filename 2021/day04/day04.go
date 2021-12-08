@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gavus/advent-of-go/utils/conv"
 	"github.com/Gavus/advent-of-go/utils/input"
+	"github.com/Gavus/advent-of-go/utils/types/bingo"
 	_ "github.com/Gavus/advent-of-go/utils/log"
 )
 
@@ -23,7 +23,7 @@ func main() {
 }
 
 func part1(input []string) int {
-	bi, bbs := conv.ToBingo(input)
+	bi, bbs := bingo.ToBingo(input)
 
 	for _, v := range bi {
 		for i := range bbs {
@@ -37,7 +37,7 @@ func part1(input []string) int {
 }
 
 func part2(input []string) int {
-	bi, bbs := conv.ToBingo(input)
+	bi, bbs := bingo.ToBingo(input)
 
 	for _, v := range bi {
 		bingoCount := 0
