@@ -62,5 +62,3 @@ func ToPresents(input []string) (Presents, error) {
 
 	return presents, nil
 }
-
-

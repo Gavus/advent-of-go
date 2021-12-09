@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/Gavus/advent-of-go/utils/input"
+	_ "github.com/Gavus/advent-of-go/utils/log"
 	"github.com/Gavus/advent-of-go/utils/types/ints"
 	"github.com/Gavus/advent-of-go/utils/types/queue_ring"
-	_ "github.com/Gavus/advent-of-go/utils/log"
 )
 
 const (
@@ -50,7 +50,7 @@ func part2(input []string) int {
 			continue
 		}
 		b.Put(v)
-		if a.Sum() < b.Sum() && i > 2{
+		if a.Sum() < b.Sum() && i > 2 {
 			increased++
 		}
 		a.Put(v)

@@ -3,9 +3,9 @@ package bingo
 import (
 	"errors"
 	"fmt"
-	"strings"
-	"strconv"
 	"github.com/Gavus/advent-of-go/utils/types/ints"
+	"strconv"
+	"strings"
 )
 
 const (
@@ -129,7 +129,6 @@ func RemoveIndex(bbs []BingoBoard, index int) []BingoBoard {
 		return append(bbs[:index], bbs[index+1:]...)
 	}
 }
-
 
 // Convert strings to BingoInput and BingoBoards.
 func ToBingo(input []string) (BingoInput, []BingoBoard) {

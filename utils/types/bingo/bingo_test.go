@@ -131,7 +131,7 @@ func TestScore(t *testing.T) {
 	bb.Add(7)
 
 	g := bb.Score()
-	w := 188*7
+	w := 188 * 7
 
 	if g != w {
 		t.Errorf(stringf.Mismatch, g, w)

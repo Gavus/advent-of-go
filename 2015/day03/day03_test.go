@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/Gavus/advent-of-go/testutils/stringf"
-	"testing"
 	"strings"
+	"testing"
 )
 
 func createInput() []string {

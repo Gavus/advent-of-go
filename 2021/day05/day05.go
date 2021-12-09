@@ -24,8 +24,7 @@ func main() {
 
 func part1(input []string) int {
 	lines := line.StringsToLines(input)
-	lines.StraightToPoints()
-	return 0
+	return lines.SumStraightOverlaps()
 }
 
 func part2(input []string) int {

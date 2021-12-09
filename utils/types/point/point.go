@@ -17,6 +17,14 @@ func Make(x int, y int) Point {
 	return Point{x, y}
 }
 
+func Makes(point ...Point) Points {
+	points := Points{}
+	for _, v := range point {
+		points = append(points, v)
+	}
+	return points
+}
+
 // Move a Point to specified Direction.
 func Move(from Point, dir direction.Direction) Point {
 	pos := from
@@ -38,6 +46,7 @@ func (p Point) String() string {
 	return fmt.Sprintf("(%d,%d)", p.X, p.Y)
 }
 
+// Returns Points without any dublicates.
 func Unique(points []Point) []Point {
 	occurred := map[Point]bool{}
 	result := []Point{}
@@ -100,4 +109,15 @@ func (points Points) LargestXY() (int, int) {
 	}
 
 	return x, y
+}
+
+// Returns Points equal arg p.
+func (points Points) Contains(p Point) Points {
+	pts := Points{}
+	for _, v := range points {
+		if v == p {
+			pts = append(pts, p)
+		}
+	}
+	return pts
 }

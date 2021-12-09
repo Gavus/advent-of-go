@@ -60,6 +60,7 @@ func CalcGammaEpsilon(bs []string) (uint, uint) {
 
 	return parse(gamma), parse(epsilon)
 }
+
 // Calculate Oxygen Generator Rating.
 func CalcOxygenGeneratorRating(input []string) uint {
 	bs := input

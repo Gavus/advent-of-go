@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/Gavus/advent-of-go/utils/input"
-	"github.com/Gavus/advent-of-go/utils/types/bingo"
 	_ "github.com/Gavus/advent-of-go/utils/log"
+	"github.com/Gavus/advent-of-go/utils/types/bingo"
 )
 
 const (

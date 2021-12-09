@@ -22,7 +22,7 @@ func createInput() []string {
 }
 
 func TestPart1(t *testing.T) {
-	g, w := part1(createInput()), 0
+	g, w := part1(createInput()), 5
 	if g != w {
 		t.Errorf(stringf.Mismatch, g, w)
 	}

@@ -2,8 +2,8 @@ package line
 
 import (
 	"fmt"
-	_ "sort"
 	"github.com/Gavus/advent-of-go/utils/types/point"
+	_ "sort"
 )
 
 type Line struct {
@@ -15,6 +15,14 @@ type Lines []Line
 
 func Make(start point.Point, end point.Point) Line {
 	return Line{start, end}
+}
+
+func Makes(line ...Line) Lines {
+	lines := Lines{}
+	for _, v := range line {
+		lines = append(lines, v)
+	}
+	return lines
 }
 
 func StringsToLines(input []string) Lines {
@@ -37,14 +45,14 @@ func (l Line) String() string {
 
 func (l Line) StraightToPoints() point.Points {
 	points := point.Points{}
-	if l.start.X == l.end.X {
+	if l.start.Y == l.end.Y {
 		for x := l.start.X; x <= l.end.X; x++ {
 			points = append(points, point.Make(x, l.start.Y))
 		}
 		for x := l.start.X; x >= l.end.X; x-- {
 			points = append(points, point.Make(x, l.start.Y))
 		}
-	} else if l.start.Y == l.end.Y {
+	} else if l.start.X == l.end.X {
 		for y := l.start.Y; y <= l.end.Y; y++ {
 			points = append(points, point.Make(l.start.X, y))
 		}
@@ -66,6 +74,30 @@ func (lines Lines) StraightToPoints() point.Points {
 
 func (lines Lines) Draw() string {
 	str := ""
+	points := lines.StraightToPoints()
+	xend, yend := points.LargestXY()
 
+	for y := 0; y <= yend; y++ {
+		for x := 0; x <= xend; x++ {
+			count := len(points.Contains(point.Make(x, y)))
+			if count > 0 {
+				str += fmt.Sprintf("%d", count)
+			} else {
+				str += "."
+			}
+		}
+		str += "\n"
+	}
 	return str
+}
+
+func (lines Lines) SumStraightOverlaps() int {
+	str := lines.Draw()
+	sum := 0
+	for _, v := range str {
+		if v > '1' && v <= '9' {
+			sum++
+		}
+	}
+	return sum
 }

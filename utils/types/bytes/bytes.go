@@ -1,7 +1,7 @@
 package bytes
 
 import (
-    "strings"
+	"strings"
 )
 
 type Bytes []byte
@@ -18,4 +18,3 @@ func ToStrings(bytes Bytes, delimiter string) []string {
 
 	return input
 }
-

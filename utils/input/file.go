@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Gavus/advent-of-go/utils/date"
-	"github.com/Gavus/advent-of-go/utils/types/bytes"
 	"github.com/Gavus/advent-of-go/utils/log"
+	"github.com/Gavus/advent-of-go/utils/types/bytes"
 	"os"
 )
 
