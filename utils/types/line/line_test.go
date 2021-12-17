@@ -61,7 +61,7 @@ func TestLinesStraightToPoints(t *testing.T) {
 
 func TestLinesDraw(t *testing.T) {
 	lines := Makes(Make(point.Make(3, 0), point.Make(3, 3)), Make(point.Make(3, 2), point.Make(0, 2)))
-	g := lines.Draw()
+	g := Draw(lines.StraightToPoints())
 	w := "...1\n...1\n1112\n...1\n"
 
 	if g != w {
@@ -71,10 +71,50 @@ func TestLinesDraw(t *testing.T) {
 
 func TestLinesSumStraightOverlaps(t *testing.T) {
 	lines := Makes(Make(point.Make(3, 0), point.Make(3, 3)), Make(point.Make(3, 2), point.Make(0, 2)))
-	g := lines.SumStraightOverlaps()
+	g := SumOverlaps(lines.StraightToPoints())
 	w := 1
 
 	if g != w {
+		t.Errorf(stringf.Mismatch, g, w)
+	}
+}
+
+func TestLineToPointsLeftToRightDown(t *testing.T) {
+	line := Make(point.Make(1,1), point.Make(3,3))
+	g := line.ToPoints()
+	w := point.Makes(point.Make(1,1), point.Make(2,2), point.Make(3,3))
+
+	if !g.Equal(w) {
+		t.Errorf(stringf.Mismatch, g, w)
+	}
+}
+
+func TestLineToPointsLeftToRightUp(t *testing.T) {
+	line := Make(point.Make(1,3), point.Make(3,1))
+	g := line.ToPoints()
+	w := point.Makes(point.Make(1,3), point.Make(2,2), point.Make(3,1))
+
+	if !g.Equal(w) {
+		t.Errorf(stringf.Mismatch, g, w)
+	}
+}
+
+func TestLineToPointsRightToLeftDown(t *testing.T) {
+	line := Make(point.Make(3,1), point.Make(1,3))
+	g := line.ToPoints()
+	w := point.Makes(point.Make(3,1), point.Make(2,2), point.Make(1,3))
+
+	if !g.Equal(w) {
+		t.Errorf(stringf.Mismatch, g, w)
+	}
+}
+
+func TestLineToPointsRightToLeftUp(t *testing.T) {
+	line := Make(point.Make(3,3), point.Make(1,1))
+	g := line.ToPoints()
+	w := point.Makes(point.Make(3,3), point.Make(2,2), point.Make(1,1))
+
+	if !g.Equal(w) {
 		t.Errorf(stringf.Mismatch, g, w)
 	}
 }

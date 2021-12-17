@@ -63,6 +63,36 @@ func (l Line) StraightToPoints() point.Points {
 	return points
 }
 
+func (l Line) ToPoints() point.Points {
+	points := point.Points{}
+
+	if l.start.Y == l.end.Y || l.start.X == l.end.X {
+		return l.StraightToPoints()
+	} else {
+		xdiff := l.end.X - l.start.X
+		ydiff := l.end.Y - l.start.Y
+		if xdiff > 0 && ydiff > 0 {
+			for i := 0; i <= xdiff; i++ {
+				points = append(points, point.Make(l.start.X+i, l.start.Y+i))
+			}
+		} else if xdiff > 0 && ydiff < 0 {
+			for i := 0; i <= xdiff; i++ {
+				points = append(points, point.Make(l.start.X+i, l.start.Y-i))
+			}
+		} else if xdiff < 0 && ydiff > 0 {
+			for i := 0; i >= xdiff; i-- {
+				points = append(points, point.Make(l.start.X+i, l.start.Y-i))
+			}
+		} else if xdiff < 0 && ydiff < 0 {
+			for i := 0; i >= xdiff; i-- {
+				points = append(points, point.Make(l.start.X+i, l.start.Y+i))
+			}
+		}
+	}
+
+	return points
+}
+
 func (lines Lines) StraightToPoints() point.Points {
 	points := point.Points{}
 
@@ -72,9 +102,17 @@ func (lines Lines) StraightToPoints() point.Points {
 	return points
 }
 
-func (lines Lines) Draw() string {
+func (lines Lines) ToPoints() point.Points {
+	points := point.Points{}
+
+	for _, line := range lines {
+		points = append(points, line.ToPoints()...)
+	}
+	return points
+}
+
+func Draw(points point.Points) string {
 	str := ""
-	points := lines.StraightToPoints()
 	xend, yend := points.LargestXY()
 
 	for y := 0; y <= yend; y++ {
@@ -91,8 +129,8 @@ func (lines Lines) Draw() string {
 	return str
 }
 
-func (lines Lines) SumStraightOverlaps() int {
-	str := lines.Draw()
+func SumOverlaps(p point.Points) int {
+	str := Draw(p)
 	sum := 0
 	for _, v := range str {
 		if v > '1' && v <= '9' {

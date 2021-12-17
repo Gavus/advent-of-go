@@ -29,7 +29,7 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	g, w := part2(createInput()), 0
+	g, w := part2(createInput()), 12
 	if g != w {
 		t.Errorf(stringf.Mismatch, g, w)
 	}

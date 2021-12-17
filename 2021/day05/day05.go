@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	question1 = "At how many points do at least two lines overlap?"
-	question2 = "unknown"
+	question1 = "At how many straight points do at least two lines overlap?"
+	question2 = "At how many points do at least two lines overlap?"
 )
 
 func main() {
@@ -24,9 +24,13 @@ func main() {
 
 func part1(input []string) int {
 	lines := line.StringsToLines(input)
-	return lines.SumStraightOverlaps()
+	points := lines.StraightToPoints()
+	return line.SumOverlaps(points)
 }
 
 func part2(input []string) int {
-	return 0
+	lines := line.StringsToLines(input)
+	points := lines.ToPoints()
+	return line.SumOverlaps(points)
+
 }
